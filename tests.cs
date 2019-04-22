@@ -65,6 +65,7 @@ namespace Tests
             }
 
             int ticks = gasSlots.Max(s=>s.WaitTime);
+            // TODO: check for overflow
             result += ticks;
             return result;
         }
