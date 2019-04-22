@@ -59,6 +59,7 @@ namespace Tests
                     {
                         return -1;
                     }
+                    // TODO: check for overflow
                     result += secs;
                 }                
             }
