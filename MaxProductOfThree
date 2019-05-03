@@ -1,0 +1,27 @@
+using System;
+// using System.Collections.Generic;
+
+// Console.WriteLine("this is a debug message");
+
+class Solution {
+    
+    public int solution(int[] A) 
+    {
+        Array.Sort(A);
+        
+        if (A[0] >= 0 || A[A.Length-1]<0)
+        {
+            return A[A.Length-3]*A[A.Length-2]*A[A.Length-1];   
+        }
+    
+        int prodFirst = A[0]*A[1];
+        int prodLast = A[A.Length-2]*A[A.Length-1];                            
+        
+        int maxFirst =  prodFirst * A[A.Length-1];       
+        int maxLast = prodLast * A[A.Length-3];          
+        
+        return Math.Max(maxFirst,maxLast);
+
+    }
+    
+}
