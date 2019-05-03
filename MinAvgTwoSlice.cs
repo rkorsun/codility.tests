@@ -11,7 +11,8 @@ class Solution {
         int pos = 0;
         for(int i = 0; i < A.Length-1; i ++)
         {
-            double avg2 = (double)(A[i]+A[i+1]) / 2;
+            double sum2 = A[i]+A[i+1];
+            double avg2 = sum2 / 2;
             if (avg2 < min)
             {
                 min = avg2;   
@@ -19,7 +20,7 @@ class Solution {
             }
             if (i<A.Length-2)
             { 
-                double avg3 = (double)(A[i] + A[i+1] + A[i+2]) / 3;
+                double avg3 = (sum2 + A[i+2]) / 3;
                 if (avg3 < min)
                 {
                     min = avg3;   
