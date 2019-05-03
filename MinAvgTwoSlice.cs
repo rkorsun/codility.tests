@@ -4,74 +4,30 @@ using System;
 
 
 class Solution {
-    
-    public class Seq
-    {
-        int[] Arr { get;set; }
-        int[] Sums { get;set;}
-        public double Avg {get;set;}
-        public int Start {get;set;}
-        public int End {get;set;}
         
-        public Seq(int[] arr, int[] sums, int start, int end)
-        {
-            this.Arr = arr;
-            this.Sums = sums;
-            
-            this.Start = start;
-            this.End = end;
-            this.Avg = (double)(this.Sums[end+1] - this.Sums[start]) / (end-start+1);
-        }
-        
-        public List<Seq> Split()
-        {
-            List<Seq> result = new List<Seq>();
-            for(int i=Start;i<=End;i++)
-            {
-                if (Arr[i] > this.Avg)
-                {
-                    if (i-Start>2) 
-                    {
-                        Seq head = new Seq(Arr, Sums, Start, i-1);
-                        result.Add(head);
-                        result.AddRange(head.Split());
-                    }
-                    if (End-i>2)
-                    {
-                        Seq tail = new Seq(Arr, Sums, i+1,End);   
-                        result.Add(tail);
-                        result.AddRange(tail.Split());
-                    }
-                    
-                }
-            }
-            return result;
-        }
-    }
-    
     public int solution(int[] A) 
     {
-        int[] pSums = new int[A.Length+1];
-        
-        for(int i = 0; i < A.Length; i ++)
+        double min = (double)(A[0]+A[1]) / 2;
+        int pos = 0;
+        for(int i = 0; i < A.Length-1; i ++)
         {
-            pSums[i+1] = pSums[i] + A[i];     
-        }
-        
-        double avg = (double)pSums[A.Length] / A.Length;
-        Seq whole = new Seq(A, pSums, 0, A.Length-1);
-        //Console.WriteLine("avg: "+avg+", "+whole.Avg);
-        
-        Seq min = whole;
-        foreach(var eachSeq in whole.Split())
-        {
-            if (eachSeq.Avg < min.Avg)
+            double avg2 = (double)(A[i]+A[i+1]) / 2;
+            if (avg2 < min)
             {
-                min = eachSeq;   
+                min = avg2;   
+                pos = i;
+            }
+            if (i<A.Length-2)
+            { 
+                double avg3 = (double)(A[i] + A[i+1] + A[i+2]) / 3;
+                if (avg3 < min)
+                {
+                    min = avg3;   
+                    pos = i;
+                }
             }
         }
-        
-        return min.Start;
+        return pos;
     }
     
     
