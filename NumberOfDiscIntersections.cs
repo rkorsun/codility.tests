@@ -7,19 +7,20 @@ using System;
 
 class Solution 
 {
+    private const int LIMIT = 10000000;
     
     public int solution(int[] A) 
     {
         int len = A.Length;
-        int[] starts = new int[len]; 
-        int[] ends = new int[len]; 
+        long[] starts = new long[len]; 
+        long[] ends = new long[len]; 
         
         
         for(int i=0; i<len; i++)
         {
-            int eachR = A[i];
-            starts[i] = i-eachR;
-            ends[i] = i+eachR;
+            long eachR = A[i];
+            starts[i] = (long)i-eachR;
+            ends[i] = (long)i+eachR;
         }
         Array.Sort(starts);
         Array.Sort(ends);
@@ -45,7 +46,11 @@ class Solution
                 //Console.WriteLine($"close... opened={currOpenCount}, intersection={intersections}");
                 currEnd++;   
             }
-            
+         
+            if(intersections > LIMIT)
+            {
+                return -1;   
+            }
         }
         
         return intersections; 
